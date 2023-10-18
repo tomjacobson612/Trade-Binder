@@ -36,3 +36,29 @@ body{
     padding: 15px;
     color: #fbfaf5;
 }
+
+.search-input {
+    width: 400px;
+    height: 30px;
+    text-align: left;
+}
+
+.search-button {
+    height: 35px;
+}
+
+.search-result {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.card {
+    width: 25%;
+    text-align: center;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+}

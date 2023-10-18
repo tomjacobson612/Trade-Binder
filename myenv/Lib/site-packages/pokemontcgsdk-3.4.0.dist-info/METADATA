@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: pokemontcgsdk
+Version: 3.4.0
+Summary: Pokemon TCG SDK for pokemontcg.io
+Home-page: https://github.com/PokemonTCG/pokemon-tcg-sdk-python
+Author: Andrew Backes
+Author-email: backes.andrew@gmail.com
+License: MIT
+Download-URL: https://github.com/PokemonTCG/pokemon-tcg-sdk-python/tarball/3.4.0
+Keywords: pokemon tcg sdk trading card game api rest
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Operating System :: OS Independent
+Requires-Dist: dacite (>=1.6.0)
+Provides-Extra: tests
+Requires-Dist: coverage ; extra == 'tests'
+Requires-Dist: coveralls ; extra == 'tests'
+Requires-Dist: ipdb ; extra == 'tests'
+Requires-Dist: mock ; extra == 'tests'
+Requires-Dist: nose ; extra == 'tests'
+Requires-Dist: preggy ; extra == 'tests'
+Requires-Dist: sphinx ; extra == 'tests'
+Requires-Dist: tox ; extra == 'tests'
+Requires-Dist: vcrpy ; extra == 'tests'
+Requires-Dist: yanc ; extra == 'tests'
+
+
+Pokemon TCG SDK is a python wrapper around the Pokemon TCG API located at pokemontcg.io
+
+
