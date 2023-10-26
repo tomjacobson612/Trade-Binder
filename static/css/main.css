@@ -62,3 +62,7 @@ body{
     display: flex;
     justify-content: center;
 }
+
+.search-input::placeholder {
+    text-align: center;
+}

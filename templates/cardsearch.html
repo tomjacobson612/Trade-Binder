@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block head %}
-
-{% endblock %}
-
 {% block body %}
 <div class="search-bar">
     <form method="POST" action="/search" onsubmit="return validate_form()">
@@ -22,13 +18,12 @@ function validate_form(){
     return true;
 }
 </script>
-</h1>
-    <ul class = search-result>
-        {% for card in cards %}
-            <li class = card>
-                <h2>{{ card.name + " " + card.number}}</h2>
-                <img src="{{ card.images.small }}" alt="{{ card.name }}" class="card-image">
-            </li>
-        {% endfor %}
-    </ul>
+<ul class = search-result>
+    {% for card in cards %}
+        <li class = card>
+            <h2>{{ card.name + " " + card.number}}</h2>
+            <img src="{{ card.images.small }}" alt="{{ card.name }}" class="card-image">
+        </li>
+    {% endfor %}
+</ul>
 {% endblock %}
