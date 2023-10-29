@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="search-bar">
+    <form method="POST" action="/search" onsubmit="return validate_form()">
+        <label for="search_query">Card Search:</label>
+        <input id="search_query" type="text" name="search_query" placeholder="Enter the name of the card you wish to search." class="search-input">
+        <input type="submit" value="Search" class="search-button">
+    </form>
+</div>
+
+<script>
+function validate_form(){
+    var search_query = document.getElementById("search_query").value;
+    if (search_query === ""){
+        return false;
+    }
+    return true;
+}
+</script>
+<ul class = search-result>
+    {% for card in cards %}
+        <li class = card>
+            <h2>{{ card.name + " " + card.number}}</h2>
+            <img src="{{ card.images.small }}" alt="{{ card.name }}" class="card-image">
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

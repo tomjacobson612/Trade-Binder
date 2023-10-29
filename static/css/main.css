@@ -1,0 +1,68 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #121212;
+    color: #fbfaf5;
+}
+
+.nav-item {
+    height: 100%;
+}
+  
+.nav-list {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #004040;
+    list-style: none;
+}
+
+.left-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logout {
+    height: 100%;
+    background-color: #004040;
+    list-style: none;
+}
+  
+.nav-link {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    padding: 15px;
+    color: #fbfaf5;
+}
+
+.search-input {
+    width: 400px;
+    height: 30px;
+    text-align: left;
+}
+
+.search-button {
+    height: 35px;
+}
+
+.search-result {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.card {
+    width: 25%;
+    text-align: center;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.search-input::placeholder {
+    text-align: center;
+}
