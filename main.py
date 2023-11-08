@@ -23,7 +23,7 @@ def search():
     
 @app.route('/add', methods=['POST'])
 def add():
-    model.insert(request.form['name'], request.form['num'])
+    model.insert(request.form['name'], request.form['num'], request.form['img'])
     return redirect(url_for('collection'))
 
 if __name__ == "__main__":
