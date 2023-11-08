@@ -1,2 +1,4 @@
 myenv/
 .vscode/
+env/
+.DS_STORE

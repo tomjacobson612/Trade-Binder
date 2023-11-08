@@ -9,11 +9,26 @@ class model(Model):
         try:
             cursor.execute("SELECT * FROM collection")
         except sqlite3.OperationalError:
-            cursor.execute("CREATE TABLE collection (name text)")
+            cursor.execute("CREATE TABLE collection (name text, num integer, img text)")
         cursor.close()
     
     def select(self):
-        pass
+        try:
+            connection = sqlite3.connect(DATABASE)
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM collection")
+            return cursor.fetchall()
+        except:
+            return ""
 
-    def insert(self):
-        pass
+    def insert(self, name, num, img):
+        params = {'name':name, 'num':num, 'img':img}
+        try:
+            connection = sqlite3.connect(DATABASE)
+            cursor = connection.cursor()
+            cursor.execute("insert into collection (name, num, img) VALUES (:name, :num, :img)", params)
+            connection.commit()
+            cursor.close()
+        except:
+            return False
+        return True
