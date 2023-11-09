@@ -13,6 +13,11 @@ def index():
 def card_search():
     return render_template('cardsearch.html')
 
+@app.route('/collection.html')
+def collection():
+    data = model.select()
+    return render_template('collection.html', data=data)
+
 @app.route('/search', methods=['POST'])
 def search():
     cards = Card.where(q='name:'+ request.form['search_query'])
