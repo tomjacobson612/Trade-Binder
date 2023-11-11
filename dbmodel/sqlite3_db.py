@@ -23,6 +23,8 @@ class model(Model):
 
     def insert(self, name, num, img):
         params = {'name':name, 'num':num, 'img':img}
+        if name is None or num is None or img is None:
+            return False
         try:
             connection = sqlite3.connect(DATABASE)
             cursor = connection.cursor()
