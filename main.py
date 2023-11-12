@@ -16,7 +16,6 @@ def card_search():
 @app.route('/collection.html')
 def collection():
     data = model.select()
-    return data
     return render_template('collection.html', data=data)
 
 @app.route('/add.html')
@@ -36,7 +35,7 @@ def add_card():
     name = request.form['add_name']
     id = request.form['add_id']
     img_url = request.form['add_img_url']
-    
+
     if name == "" or id == "" or img_url == "":
         return redirect(url_for('collection'))
     else:
