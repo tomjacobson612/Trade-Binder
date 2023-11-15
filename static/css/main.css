@@ -66,3 +66,39 @@ body{
 .search-input::placeholder {
     text-align: center;
 }
+
+.add-form {
+    width: 400px; 
+    height: 250px;
+    margin: auto; 
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-form label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; 
+}
+
+
+.add-form input {
+    width: 90%; 
+    box-sizing: border-box; 
+    margin-bottom: 10px; 
+}
+
+.add-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.collection-result {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}

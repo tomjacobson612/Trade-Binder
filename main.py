@@ -18,6 +18,10 @@ def collection():
     data = model.select()
     return render_template('collection.html', data=data)
 
+@app.route('/add.html')
+def add():
+    return render_template('add.html')
+
 @app.route('/search', methods=['POST'])
 def search():
     cards = Card.where(q='name:'+ request.form['search_query'])
@@ -27,9 +31,16 @@ def search():
         return redirect('cardsearch.html')
     
 @app.route('/add', methods=['POST'])
-def add():
-    model.insert(request.form['name'], request.form['num'], request.form['img'])
-    return redirect(url_for('collection'))
+def add_card():
+    name = request.form['add_name']
+    id = request.form['add_id']
+    img_url = request.form['add_img_url']
+
+    if name == "" or id == "" or img_url == "":
+        return redirect(url_for('collection'))
+    else:
+        model.insert(name, id, img_url)
+        return redirect(url_for('collection'))
 
 if __name__ == "__main__":
     app.run(debug=True)

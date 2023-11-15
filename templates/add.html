@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
+<form method="POST" action="/add" onsubmit="" class="add-form">
+    <label for="add_name">Name:</label>
+    <input id="add_name" type="text" name="add_name" placeholder="Enter the name of the card you wish to add." class="add-name-input">
+    <label for="add_id">ID:</label>
+    <input id="add_id" type="text" name="add_id" placeholder="Enter the ID of the card you wish to add." class="add-id-input">
+    <label for="add_img_url">Image URL:</label>
+    <input id="add_img_url" type="text" name="add_img_url" placeholder="Enter the img url of the card you wish to add." class="add-img-url-input">
+    <input type="submit" value="Add" class="add-button">
+</form>
 {% endblock %}
