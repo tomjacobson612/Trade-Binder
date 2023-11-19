@@ -41,6 +41,23 @@ def add_card():
     else:
         model.insert(name, id, img_url)
         return redirect(url_for('collection'))
+    
+@app.route('/add_to_collection', methods=['POST'])
+def add_card_from_search():
+    name = request.form['name']
+    id = request.form['id']
+    img_url = request.form['image']
+
+    if name == "" or id == "" or img_url == "":
+        message = "Card not added."
+        return render_template('cardsearch.html', message = message)
+    else:
+        if model.insert(name, id, img_url):
+            message = "Card successfully added."
+            return render_template('cardsearch.html', message = message)
+        else:
+            message = "Card not added."
+            return render_template('cardsearch.html', message = message)
 
 if __name__ == "__main__":
     app.run(debug=True)
