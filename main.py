@@ -44,20 +44,21 @@ def add_card():
     
 @app.route('/add_to_collection', methods=['POST'])
 def add_card_from_search():
-    name = request.form['name']
-    id = request.form['id']
-    img_url = request.form['image']
+    data = request.json
+    name = data.get('name', '')
+    card_id = data.get('id', '')
+    img_url = data.get('image', '')
 
-    if name == "" or id == "" or img_url == "":
+    if name == "" or card_id == "" or img_url == "":
         message = "Card not added."
-        return render_template('cardsearch.html', message = message)
+        return jsonify(message = message)
     else:
-        if model.insert(name, id, img_url):
+        if model.insert(name, card_id, img_url):
             message = "Card successfully added."
-            return render_template('cardsearch.html', message = message)
+            return jsonify(message = message)
         else:
             message = "Card not added."
-            return render_template('cardsearch.html', message = message)
+            return jsonify(message = message)
 
 if __name__ == "__main__":
     app.run(debug=True)
