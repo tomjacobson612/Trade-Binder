@@ -1,8 +1,14 @@
 body{
     margin: 0;
-    font-family: sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: #121212;
     color: #fbfaf5;
+
+    background-image: url("../images/PokemonParkBanner.jpg");
+    background-size: 100% 100%; 
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
 }
 
 .banner {
@@ -44,14 +50,42 @@ body{
     color: #fbfaf5;
 }
 
+.search-bar-container{
+    background-color: #121212;
+    width: 720px;
+    height: 50px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+
+    border: solid;
+    border-color: rgb(125, 2, 2);
+    border-width: thin;
+    border-radius: 10px;
+}
+
+.search-bar label {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
 .search-input {
-    width: 400px;
+    width: 450px;
     height: 30px;
     text-align: left;
 }
 
+.search-input::placeholder {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
 .search-button {
     height: 35px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-right: 5px;
 }
 
 .search-result {
@@ -65,40 +99,56 @@ body{
     text-align: center;
 }
 
-.search-bar {
+.add-form-container {
+    background-image: url("../images/PokedexBackground.webp");
+    background-size: 100% 100%;
+    width: 600px;
+    height: 275px;
+    margin: 0 auto;
+
     display: flex;
     justify-content: center;
-}
+    align-items: center; 
 
-.search-input::placeholder {
-    text-align: center;
+    border: solid;
+    border-color: rgb(125, 2, 2);
+    border-width: thin;
+    border-radius: 10px;
 }
 
 .add-form {
-    width: 400px; 
-    height: 250px;
-    margin: auto; 
-    text-align: left;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin: 1%;
 }
 
 .add-form label {
+    font-weight: bold;
+    color: #121212;
     display: flex;
-    align-items: center;
-    margin-bottom: 5px; 
+    margin-bottom: 1%; 
+    margin-top: 1%;
 }
 
 
-.add-form input {
-    width: 90%; 
+.add-form input { 
     box-sizing: border-box; 
-    margin-bottom: 10px; 
+    margin-bottom: 1%; 
+    margin-top: 1%;
+}
+
+.add-form input::placeholder {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
 }
 
 .add-button {
-    background-color: #4caf50;
-    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    background-color: #FFDAB9;
+    color: black;
     padding: 10px;
     border: none;
     cursor: pointer;
@@ -108,12 +158,4 @@ body{
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-}
-
-body {
-    background-image: url("../images/PokemonParkBanner.jpg");
-    background-size: 100% 100%; 
-    background-position: center;
-    background-repeat: no-repeat; 
-    background-attachment: fixed;
 }
