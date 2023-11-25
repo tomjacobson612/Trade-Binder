@@ -56,21 +56,42 @@ def logout():
 
 @app.route("/")
 def home():
-    return render_template("index.html", session=session.get('user'))
+    # if session.get('user') is not None:
+    #     authenticated = True
+    #     email = f"{session.get('user').get('userinfo').get('email')}"
+    # else:
+    #     authenticated = False
+    #     email = "Not logged in"
+    if session.get('user'):
+        email = session.get('user').get('userinfo').get('email')
+    else:
+        email = "Not logged in"
+    return render_template("index.html", session=session.get('user'), email=email)
 
 @app.route('/cardsearch.html')
 def card_search():
-    return render_template('cardsearch.html')
+    if session.get('user'):
+        email = session.get('user').get('userinfo').get('email')
+        return render_template('cardsearch.html', email=email)
+    else:
+        return render_template('cardsearch.html')
 
 @app.route('/collection.html')
 def collection():
-    email = session.get('user').get('userinfo').get('email')
-    data = model.select(email)
+    if session.get('user'):
+        email = session.get('user').get('userinfo').get('email')
+        data = model.select(email)
+    else:
+        return redirect("/login")
     return render_template('collection.html', data=data, email=email)
 
 @app.route('/add.html')
 def add():
-    return render_template('add.html')
+    if session.get('user'):
+        email = session.get('user').get('userinfo').get('email')
+    else:
+        return redirect("/login")
+    return render_template('add.html', email=email)
 
 @app.route('/search', methods=['POST'])
 def search():
