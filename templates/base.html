@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UACompatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    {% block head %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <nav class="nav-bar">
     <ul class="nav-list">
@@ -15,7 +15,12 @@
             <li class="nav-item"><a href="" class="nav-link">Wishlist</a></li>
             <li class="nav-item"><a href="{{ url_for('add') }}" class="nav-link">Add Card</a></li>
         </div>
-        <li class="nav-logout"><a href="" class="nav-link">Logout</a></li>
+        {% if session %}
+        <li><p>{{ email }}</p></li>
+        <li class="nav-logout"><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
+        {% else %}
+        <li class="nav-logout"><a href="{{ url_for('login') }}" class="nav-link">Login</a></li>
+        {% endif %}
     </ul>
 </nav>
 <body>
