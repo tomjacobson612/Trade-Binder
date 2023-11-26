@@ -5,3 +5,4 @@ __pycache__/
 .DS_STORE
 *.db
 .env
+notes.txt
