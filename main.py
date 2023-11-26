@@ -95,9 +95,11 @@ def add():
 
 @app.route('/search', methods=['POST'])
 def search():
+    if session.get('user'):
+        email = session.get('user').get('userinfo').get('email')
     cards = Card.where(q='name:'+ request.form['search_query'])
     if cards:
-        return render_template('cardsearch.html', cards=cards, search_query=request.form['search_query'])
+        return render_template('cardsearch.html', cards=cards, email=email, search_query=request.form['search_query'])
     else:
         return redirect('cardsearch.html')
     
@@ -117,6 +119,7 @@ def add_card():
 @app.route('/add_to_collection', methods=['POST'])
 def add_card_from_search():
     data = request.json
+    email = session.get('user').get('userinfo').get('email')
     name = data.get('name', '')
     card_id = data.get('id', '')
     img_url = data.get('image', '')
@@ -125,7 +128,7 @@ def add_card_from_search():
         message = "Card not added."
         return jsonify(message = message)
     else:
-        if model.insert(name, card_id, img_url):
+        if model.insert(email, name, card_id, img_url):
             message = "Card successfully added."
             return jsonify(message = message)
         else:
