@@ -34,3 +34,14 @@ class model(Model):
         except:
             return False
         return True
+    
+    def remove(self, email, name, num, img):
+        try:
+            connection = sqlite3.connect(DATABASE)
+            cursor = connection.cursor()
+            cursor.execute(f"DELETE FROM collection WHERE email='{email}' AND name='{name}' AND num={num} AND img='{img}'")
+            connection.commit()
+            cursor.close()
+        except:
+            return False
+        return True

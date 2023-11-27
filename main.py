@@ -115,6 +115,19 @@ def add_card():
     else:
         model.insert(email, name, id, img_url)
         return redirect(url_for('collection'))
+
+@app.route('/delete', methods=['DELETE'])
+def remove_card():
+    name = request.form['name']
+    id = request.form['id']
+    img_url = request.form['img']
+    email = session.get('user').get('userinfo').get('email')
+
+    if name == "" or id == "" or img_url == "":
+        return redirect(url_for('collection'))
+    else:
+        model.remove(email, name, id, img_url)
+        return redirect(url_for('collection'))
     
 @app.route('/add_to_collection', methods=['POST'])
 def add_card_from_search():
