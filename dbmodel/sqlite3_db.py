@@ -9,26 +9,30 @@ class model(Model):
         try:
             cursor.execute(f"SELECT * FROM collection")
         except sqlite3.OperationalError:
-            cursor.execute("CREATE TABLE collection (email text, name text, num integer, img text)")
+            cursor.execute("CREATE TABLE collection (email text, name text, num integer, img text, wishlist int)")
         cursor.close()
     
-    def select(self, email):
+    def select(self, email, wishlist):
         try:
             connection = sqlite3.connect(DATABASE)
             cursor = connection.cursor()
-            cursor.execute(f"SELECT * FROM collection WHERE email='{email}'")
+            if wishlist == 'FALSE':
+                cursor.execute(f"SELECT * FROM collection WHERE email='{email}' AND wishlist='FALSE'")
+            else:
+                cursor.execute(f"SELECT * FROM collection WHERE email='{email}' AND wishlist='TRUE'")
+
             return cursor.fetchall()
         except:
             return ""
 
-    def insert(self, email, name, num, img):
-        params = {'email':email, 'name':name, 'num':num, 'img':img}
+    def insert(self, email, name, num, img, wishlist):
+        params = {'email':email, 'name':name, 'num':num, 'img':img, 'wishlist':wishlist}
         if name is None or num is None or img is None:
             return False
         try:
             connection = sqlite3.connect(DATABASE)
             cursor = connection.cursor()
-            cursor.execute("insert into collection (email, name, num, img) VALUES (:email, :name, :num, :img)", params)
+            cursor.execute("insert into collection (email, name, num, img, wishlist) VALUES (:email, :name, :num, :img, :wishlist)", params)
             connection.commit()
             cursor.close()
         except:

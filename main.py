@@ -56,12 +56,6 @@ def logout():
 
 @app.route("/")
 def home():
-    # if session.get('user') is not None:
-    #     authenticated = True
-    #     email = f"{session.get('user').get('userinfo').get('email')}"
-    # else:
-    #     authenticated = False
-    #     email = "Not logged in"
     if session.get('user'):
         email = session.get('user').get('userinfo').get('email')
     else:
@@ -80,10 +74,19 @@ def card_search():
 def collection():
     if session.get('user'):
         email = session.get('user').get('userinfo').get('email')
-        data = model.select(email)
+        data = model.select(email, wishlist='FALSE')
     else:
         return redirect("/login")
     return render_template('collection.html', data=data, email=email)
+
+@app.route('/wishlist.html')
+def wishlist():
+    if session.get('user'):
+        email = session.get('user').get('userinfo').get('email')
+        data = model.select(email, wishlist='TRUE')
+    else:
+        return redirect("/login")
+    return render_template('wishlist.html', data=data, email=email)
 
 @app.route('/add.html')
 def add():
@@ -113,7 +116,7 @@ def add_card():
     if name == "" or id == "" or img_url == "":
         return redirect(url_for('collection'))
     else:
-        model.insert(email, name, id, img_url)
+        model.insert(email, name, id, img_url, wishlist='FALSE')
         return redirect(url_for('collection'))
 
 @app.route('/delete', methods=['DELETE'])
@@ -141,7 +144,26 @@ def add_card_from_search():
         message = "Card not added."
         return jsonify(message = message)
     else:
-        if model.insert(email, name, card_id, img_url):
+        if model.insert(email, name, card_id, img_url, wishlist='FALSE'):
+            message = "Card successfully added."
+            return jsonify(message = message)
+        else:
+            message = "Card not added."
+            return jsonify(message = message)
+
+@app.route('/add_to_wishlist', methods=['POST'])
+def add_card_from_search_to_wishlist():
+    data = request.json
+    email = session.get('user').get('userinfo').get('email')
+    name = data.get('name', '')
+    card_id = data.get('id', '')
+    img_url = data.get('image', '')
+
+    if name == "" or card_id == "" or img_url == "":
+        message = "Card not added."
+        return jsonify(message = message)
+    else:
+        if model.insert(email, name, card_id, img_url, wishlist='TRUE'):
             message = "Card successfully added."
             return jsonify(message = message)
         else:

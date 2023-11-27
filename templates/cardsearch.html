@@ -42,6 +42,9 @@ function validate_form(){
             <form id="addToCollectionForm">
                 <button type="button" class="add_button" onclick="addToCollection('{{ email }}', '{{ card.name }}', '{{ card.number }}', '{{ card.images.small }}')">Add to Collection</button>
             </form>
+            <form id="addToWishlistForm">
+                <button type="button" class="add_button" onclick="addToWishlist('{{ email }}', '{{ card.name }}', '{{ card.number }}', '{{ card.images.small }}')">Add to Wishlist</button>
+            </form>
             <img src="{{ card.images.small }}" alt="{{ card.name }}" class="card-image">
         </li>
     {% endfor %}
@@ -52,6 +55,25 @@ function validate_form(){
         $.ajax({
             type: 'POST',
             url: '/add_to_collection',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                email: email,
+                name: name,
+                id: id,
+                image: image
+            }),
+            success: function (data) {
+                window.alert(data.message);
+            },
+            error: function () {
+                window.alert('An error occurred while attempting to add the card to your collection.');
+            }
+        });
+    }
+    function addToWishlist(email, name, id, image) {
+        $.ajax({
+            type: 'POST',
+            url: '/add_to_wishlist',
             contentType: 'application/json',
             data: JSON.stringify({
                 email: email,
