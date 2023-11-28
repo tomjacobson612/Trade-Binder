@@ -121,16 +121,18 @@ def add_card():
 
 @app.route('/delete', methods=['DELETE'])
 def remove_card():
-    name = request.form['name']
-    id = request.form['id']
-    img_url = request.form['img']
+    data = request.json
     email = session.get('user').get('userinfo').get('email')
+    name = data.get('name', '')
+    card_id = data.get('id', '')
+    img_url = data.get('image', '')
 
-    if name == "" or id == "" or img_url == "":
+    if name == "" or card_id == "" or img_url == "":
         return redirect(url_for('collection'))
     else:
-        model.remove(email, name, id, img_url)
-        return redirect(url_for('collection'))
+        model.remove(email, name, card_id, img_url)
+        message = f'{name} {card_id} successfully removed from collection.'
+        return jsonify(message = message)
     
 @app.route('/add_to_collection', methods=['POST'])
 def add_card_from_search():
@@ -145,7 +147,7 @@ def add_card_from_search():
         return jsonify(message = message)
     else:
         if model.insert(email, name, card_id, img_url, wishlist='FALSE'):
-            message = "Card successfully added."
+            message = message = f'{name} {card_id} successfully added to collection.'
             return jsonify(message = message)
         else:
             message = "Card not added."
@@ -164,7 +166,7 @@ def add_card_from_search_to_wishlist():
         return jsonify(message = message)
     else:
         if model.insert(email, name, card_id, img_url, wishlist='TRUE'):
-            message = "Card successfully added."
+            message = f'{name} {card_id} successfully added to wishlist.'
             return jsonify(message = message)
         else:
             message = "Card not added."

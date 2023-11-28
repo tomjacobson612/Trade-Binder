@@ -2,13 +2,38 @@
 
 
 {% block body %}
-<h1>Collection</h1>
 <ul class = "collection-result">
     {% for card in data %}
         <li class = "card">
-            <h2>{{ card[1] }} {{ card[2] }}</h2>
+            <h2 class = "card-heading">{{ card[1] }} {{ card[2] }}</h2>
+            <form id="removeFromCollectionForm">
+                <button type="button" class="remove_button" onclick="removeFromCollection('{{ email }}', '{{ card[1] }}', '{{ card[2] }}', '{{ card[3] }}')">Remove From Collection</button>
+            </form>
             <img src="{{ card[3] }}" alt="" class="card-image">
         </li>
     {% endfor %}
 </ul>
+
+<script>
+    function removeFromCollection(email, name, id, image) {
+    $.ajax({
+        type: 'DELETE',
+        url: '/delete',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            email: email,
+            name: name,
+            id: id,
+            image: image
+        }),
+        success: function (data) {
+            window.alert(data.message);
+            location.reload();
+        },
+        error: function () {
+            window.alert('An error occurred while attempting to remove the card from your collection.');
+        }
+    });
+}
+</script>
 {% endblock %}

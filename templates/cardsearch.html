@@ -38,7 +38,7 @@ function validate_form(){
 <ul class = "search-result">
     {% for card in cards %}
         <li class = "card">
-            <h2>{{ card.name + " " + card.number}}</h2>
+            <h2 class = "card-heading" >{{ card.name + " " + card.number}}</h2>
             <form id="addToCollectionForm">
                 <button type="button" class="add_button" onclick="addToCollection('{{ email }}', '{{ card.name }}', '{{ card.number }}', '{{ card.images.small }}')">Add to Collection</button>
             </form>
