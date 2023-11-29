@@ -22,7 +22,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #004040;
+    background-color: black;
     list-style: none;
 }
 
@@ -197,10 +197,19 @@ body{
     text-align: center;
 }
 
+.text-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 .landing-text{
     text-indent: 20px;
+    max-width: 100%;
 }
 
 .landing-image{
     max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
 }
