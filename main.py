@@ -100,11 +100,13 @@ def add():
 def search():
     if session.get('user'):
         email = session.get('user').get('userinfo').get('email')
-    cards = Card.where(q='name:'+ request.form['search_query'])
-    if cards:
-        return render_template('cardsearch.html', cards=cards, email=email, search_query=request.form['search_query'])
+        cards = Card.where(q='name:'+ request.form['search_query'])
+        if cards:
+            return render_template('cardsearch.html', cards=cards, email=email, search_query=request.form['search_query'])
+        else:
+            return redirect('cardsearch.html')
     else:
-        return redirect('cardsearch.html')
+        return redirect("/login")
     
 @app.route('/add', methods=['POST'])
 def add_card():
